@@ -13,10 +13,10 @@
   "clips": [
     {
       "id": "01",
-      "name": "一个实际演示",
+      "name": "建筑模型漫游",
       "tag": "创作实测",
-      "headline": ["做一个模型", "看看最终效果"],
-      "opening_hook": {"text": "这个效果怎么做？", "duration": 3},
+      "headline": ["建筑模型漫游", "看看室内布局"],
+      "opening_hook": {"text": "建筑模型\n可以直接进去逛", "duration": 3},
       "context": "本人作品 · 现场演示",
       "speaker": "讲者",
       "kind": "现场演示",

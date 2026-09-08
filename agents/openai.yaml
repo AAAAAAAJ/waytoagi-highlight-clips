@@ -1,4 +1,4 @@
 interface:
   display_name: "WaytoAGI 高光剪辑"
   short_description: "把妙记与长视频去口癖、删冗余，剪成有开头看点和品牌样式的短视频"
-  default_prompt: "使用 $waytoagi-highlight-clips，把这段妙记制作成适合二次传播的高光短视频，去掉无意义口癖和冗余片段，优化前3秒并沿用灰白底、黑色大字和彩色点缀。"
+  default_prompt: "使用 $waytoagi-highlight-clips，把这段妙记制作成高光短视频，前3秒先讲清这是什么、能做什么或在讲什么，去掉无意义口癖和冗余片段，沿用灰白底、黑色大字和彩色点缀。"
