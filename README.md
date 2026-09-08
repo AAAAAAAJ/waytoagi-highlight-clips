@@ -1,11 +1,12 @@
 # WaytoAGI 高光剪辑 Skill
 
-把飞书妙记、共学直播或本地长视频制作成适合二次传播的高光短视频。包含案例筛选、前 3 秒设计、原声与字幕同步、WaytoAGI 品牌排版、渲染、验收和交付流程。
+把飞书妙记、共学直播或本地长视频制作成适合二次传播的高光短视频。包含案例筛选、口癖与冗余片段精剪、前 3 秒设计、原声与字幕同步、WaytoAGI 品牌排版、渲染、验收和交付流程。
 
 ## 适合什么任务
 
 - 从长视频中筛选实际案例、操作方法或有趣原话，制作可独立理解的短视频。
 - 给已有成片追加案例、调整背景样式或优化前 3 秒。
+- 剪掉无意义口癖、重复起句、同义复述和无关等待，让原声表达更紧凑。
 - 用同次演示的真实结果画面开场，后文保留对应操作、结论和适用边界。
 - 批量导出 MP4、封面、SRT 字幕、发布文案、剪辑时间码与 ZIP 素材包。
 
@@ -25,7 +26,7 @@ git clone https://github.com/AAAAAAAJ/waytoagi-highlight-clips.git
 
 ```text
 使用 $waytoagi-highlight-clips，把这段妙记剪成适合二次传播的高光短视频。
-沿用当前品牌样式，重点优化前3秒。
+沿用当前品牌样式，去掉无意义口癖和冗余片段，重点优化前3秒。
 来源：填入本次妙记链接或本地视频路径。
 ```
 
@@ -75,6 +76,22 @@ python scripts/package_delivery.py --project projects/demo/project.json
 
 脚本按项目 JSON 渲染。下载视频、转写、选题和发布操作由使用 Skill 的助手结合可用工具完成。
 
+## 去口癖与删冗余片段
+
+由助手结合逐字稿、原音和画面判断哪些内容可删。支持填充音、重复词、卡顿起句、冗余复述与无关等待；有语义的连接词、否定、数量、条件、情绪和演示音效需要保留。
+
+先按 [精剪说明](references/speech-cleanup.md) 写出基于旧成片时间的删除计划，再生成新项目：
+
+```bash
+python scripts/refine_speech.py --project projects/demo/project.json --edits projects/demo/speech-edits.json --out projects/demo-clean/project.json
+python scripts/render_clips.py --project projects/demo-clean/project.json --validate-only
+python scripts/render_clips.py --project projects/demo-clean/project.json
+python scripts/verify_media.py projects/demo-clean/output --report-dir projects/demo-clean/work/verify
+python scripts/package_delivery.py --project projects/demo-clean/project.json
+```
+
+`refine_speech.py` 应用已复核的删除决定，更新声音与画面的保留区间，并同步调整字幕、补画面、来源标签、封面与开头标题时间。它保留旧项目，生成新的项目与 `speech-edit-report.json`；实际裁音由后续渲染完成。不能用只删字幕或全片加速来代替精剪。
+
 ## 前 3 秒与剪辑规则
 
 - 开头只承诺一个具体看点：真实结果、可验证的问题、完整原话或明确的交互变化。
@@ -90,10 +107,12 @@ python scripts/package_delivery.py --project projects/demo/project.json
 |---|---|
 | [SKILL.md](SKILL.md) | 助手调用入口与完整流程 |
 | [editorial-workflow.md](references/editorial-workflow.md) | 案例筛选、校对与剪辑 |
+| [speech-cleanup.md](references/speech-cleanup.md) | 去口癖、删冗余、原音剪点与时间轴调整 |
 | [opening-hooks.md](references/opening-hooks.md) | 开头设计与后文兑现 |
 | [brand-style.md](references/brand-style.md) | 颜色、排版、字体与 Logo 规范 |
 | [project-schema.md](references/project-schema.md) | 项目 JSON 字段和时间轴规则 |
 | [feishu-delivery.md](references/feishu-delivery.md) | 飞书预览、素材包和版本替换 |
+| `scripts/refine_speech.py` | 应用删除计划并同步调整项目时间轴 |
 | `scripts/render_clips.py` | 样片与正式视频渲染 |
 | `scripts/verify_media.py` | 媒体技术验收 |
 | `scripts/package_delivery.py` | 发布文案、时间码与素材包 |
