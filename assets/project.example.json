@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "source": "source.mp4",
+  "output_dir": "output",
+  "work_dir": "work",
+  "event": {
+    "name": "创作共学",
+    "date": "2026.01.01",
+    "footer": "一起动手，把 AI 用起来"
+  },
+  "style": {"preset": "waytoagi-light"},
+  "fps": 25,
+  "clips": [
+    {
+      "id": "01",
+      "name": "一个实际演示",
+      "tag": "创作实测",
+      "headline": ["做一个模型", "看看最终效果"],
+      "opening_hook": {"text": "这个效果怎么做？", "duration": 3},
+      "context": "本人作品 · 现场演示",
+      "speaker": "讲者",
+      "kind": "现场演示",
+      "takeaway": "从输入到操作，再看实际结果",
+      "hook": "从输入到操作，再看实际结果",
+      "source_start": 0,
+      "source_end": 8,
+      "keep": [[0, 8]],
+      "crop": [0, 0, 1920, 1080],
+      "cover_output_time": 4,
+      "caption_timebase": "window",
+      "captions": [],
+      "publish_caption": "展示实际操作与结果，发布前按源视频补充具体工具和方法。",
+      "note": "此文件展示配置结构；源视频、日期、说话内容与时间码应按本次素材填写。",
+      "topics": ["AI共学"]
+    }
+  ]
+}

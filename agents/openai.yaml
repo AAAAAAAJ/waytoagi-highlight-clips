@@ -1,0 +1,4 @@
+interface:
+  display_name: "WaytoAGI 高光剪辑"
+  short_description: "把妙记与长视频剪成有开头钩子、字幕和品牌样式的二次传播成片"
+  default_prompt: "使用 $waytoagi-highlight-clips，把这段妙记制作成适合二次传播的高光短视频，优化前3秒并沿用灰白底、黑色大字和彩色点缀。"
